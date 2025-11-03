@@ -20,7 +20,6 @@ public class Item{
     public String toString() {
         return "Item [name=" + name + ", total=" + price+ "]";
     }
-
 }
 
 
