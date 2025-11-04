@@ -4,15 +4,15 @@ public class Test {
 	public static void main(String[] args) {
 		// .. Main method setup ... //
         Physician doctor10 = new Physician(1);
-        AdminUser roseTyler = new AdminUser(2, "Companion");
-        AdminUser donnaNoble = new AdminUser(3, "Companion");
+        AdminUser roseTyler = new AdminUser(2);
+        AdminUser donnaNoble = new AdminUser(3);
         
         
         System.out.println("\n========== Physician Tests ==========\n");
         String pinTest1 = doctor10.assignPin(42)? "FAIL" : "PASS";
         System.out.printf("Physician pin assign test 1: %s\n", pinTest1);
         
-        String pinTest2 = doctor10.assignPin(4000)? "PASS" : "FAIL";
+        String pinTest2 = doctor10.assignPin(1001)? "PASS" : "FAIL";
         System.out.printf("Physician pin assign test 2: %s\n", pinTest2);
         
         String authTest1 = doctor10.accessAuthorized(1234)? "FAIL" : "PASS";

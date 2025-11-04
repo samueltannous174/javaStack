@@ -11,7 +11,6 @@ public interface HIPAACompliantAdmin {
         System.out.println(reportSecurityIncidents());
     }
     
-    // QA Test, PASS/FAIL of reports against QA expected results
     public default boolean adminQATest(ArrayList<String> expectedIncidents) {
         if (reportSecurityIncidents().equals(expectedIncidents)) {
             System.out.println("PASS");
