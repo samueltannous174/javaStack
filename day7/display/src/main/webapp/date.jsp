@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo JSP</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="/js/logic.js"></script>
 </head>
-<body>
+<body onload="showAlert2()">
 <h1>
-    <h1><c:out value="${date}"/></h1>
+    <h1 class="blue"><c:out value="${date}"/></h1>
 </h1>
 </body>
 </html>
