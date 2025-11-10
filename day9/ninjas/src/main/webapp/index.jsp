@@ -84,22 +84,19 @@
             <h1 class="text-4xl font-bold text-black-800 ">Activities: </h1>
         </div>
 
-        <textarea class="w-full h-full p-4 border rounded-md  cursor-default bg-gray-100   " rows="7" readonly  >
-              <c:forEach var="item" items="${info}">
-                  <c:choose>
-                      <c:when test="${fn:contains(item, 'earned')}">
-                          <p class="text-green-400">
-                          <c:out value="${item}" />
-                          </p>
-                      </c:when>
-                      <c:otherwise>
-                          <p class="text-red-700">
-                          <c:out value="${item}" />
-                          </p>
-                      </c:otherwise>
-                  </c:choose>
-              </c:forEach>
-        </textarea>
+        <div class="w-full h-64 p-4 border rounded-md bg-gray-100 overflow-y-auto">
+            <c:forEach var="item" items="${info}">
+                <c:choose>
+                    <c:when test="${fn:contains(item, 'earned')}">
+                        <p class="text-green-600 mb-1"><c:out value="${item}" /></p>
+                    </c:when>
+                    <c:otherwise>
+                        <p class="text-red-600 mb-1"><c:out value="${item}" /></p>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>
+
 
 
 

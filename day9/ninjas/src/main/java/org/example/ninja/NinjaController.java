@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.time.LocalDateTime;
+
 
 
 
@@ -32,6 +34,7 @@ public class NinjaController {
             session.setAttribute("info", info);
         }
         ArrayList<String> info = (ArrayList<String>) session.getAttribute("info");
+        LocalDateTime currentDateTime = LocalDateTime.now();
 
 
         session.getAttribute("gold");
@@ -45,13 +48,13 @@ public class NinjaController {
 
         switch (type){
             case "Farm":
-                 min = 10;
-                 max = 20;
-                 randomNumber = (int)(Math.random() * ((max - min) + 1)) + min;
-                 gold += randomNumber;
-                 session.setAttribute("gold",gold);
+                min = 10;
+                max = 20;
+                randomNumber = (int)(Math.random() * ((max - min) + 1)) + min;
+                gold += randomNumber;
+                session.setAttribute("gold",gold);
                 System.out.println(gold);
-                info.add("earned"+ randomNumber);
+                info.add("earned a farm "+ randomNumber+ " " + currentDateTime);
                 break;
 
 
@@ -61,7 +64,7 @@ public class NinjaController {
                 randomNumber = (int)(Math.random() * ((max - min) + 1)) + min;
                 gold += randomNumber;
                 session.setAttribute("gold",gold);
-                info.add("earned"+ randomNumber);
+                info.add("earned a cave "+ randomNumber+ " " + currentDateTime);
                 break;
 
 
@@ -71,9 +74,8 @@ public class NinjaController {
                 randomNumber = (int)(Math.random() * ((max - min) + 1)) + min;
                 gold += randomNumber;
                 session.setAttribute("gold",gold);
-                info.add("earned"+ randomNumber);
+                info.add("earned a house "+ randomNumber+ " " + currentDateTime);
                 break;
-
 
             case "Quest":
                 min = 0;
@@ -81,10 +83,10 @@ public class NinjaController {
                 randomNumber = (int)(Math.random() * ((max - min) + 1)) + min;
                 if (randomNumber%2 == 0){
                     gold+=randomNumber;
-                    info.add("earned"+ randomNumber);
+                    info.add("completed a quest earned"+ randomNumber + " " + currentDateTime);
                 }else {
                     gold-=randomNumber;
-                    info.add("taken"+ randomNumber);
+                    info.add("failed a quest taken"+ randomNumber + " " + currentDateTime);
                 }
                 session.setAttribute("gold",gold);
                 break;
