@@ -6,6 +6,7 @@ import org.example.dojos_ninjas.Models.Dojo;
 import org.example.dojos_ninjas.Models.Ninja;
 import org.example.dojos_ninjas.Services.DojoService;
 import org.example.dojos_ninjas.Services.NinjaService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,6 +41,7 @@ public class mainController {
         return "newNinja";
     }
 
+
     @PostMapping("/create_dojo")
     public String createDojo(@Valid @ModelAttribute("dojo") Dojo dojo, BindingResult result){
         if (result.hasErrors()){
@@ -49,9 +51,17 @@ public class mainController {
                     return "redirect:/" ;
     }
 
+    @GetMapping("/create_ninja")
+    public String redirectCreateNinjaForm() {
+        return "redirect:/new_ninja";
+    }
+
     @PostMapping("/create_ninja")
-    public String createNinja(@Valid @ModelAttribute("ninja") Ninja ninja, BindingResult result){
+    public String createNinja(@Valid @ModelAttribute("ninja") Ninja ninja, BindingResult result,Model model){
         if (result.hasErrors()){
+            List<Dojo> dojos= dojoService.getAll();
+            model.addAttribute("dojos",dojos);
+
             return "newNinja";
         }
         ninjaService.createNinja(ninja);
@@ -62,11 +72,11 @@ public class mainController {
     @GetMapping("dojos/{id}")
     public String showDojo(@PathVariable("id") Long id, Model model){
         Dojo dojo= dojoService.findDojo(id);
+        if (dojo == null){
+            return "redirect:/" ;
+        }
 
         model.addAttribute("dojo", dojo);
         return "showDojo";
     }
-
-
-
 }

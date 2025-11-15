@@ -2,6 +2,10 @@ package org.example.dojos_ninjas.Models;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -15,11 +19,13 @@ public class Ninja {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @NotBlank
     private  String first_name;
+    @NotBlank
     private String last_name;
-
-    private int age;
+    @NotNull(message="Age is required")
+    @Min(value = 1, message="Age must be at least 1")
+    private Integer age;
 
     @Column(updatable=false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -57,11 +63,12 @@ public class Ninja {
         this.last_name = last_name;
     }
 
-    public int getAge() {
+
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -99,7 +106,8 @@ public class Ninja {
                 ", age=" + age +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", dojo=" + dojo.getId() +
+                ", dojo=" + (dojo != null ? dojo.getId() : "null") +
                 '}';
     }
+
 }

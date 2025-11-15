@@ -16,10 +16,10 @@
 <h1 class="text-4xl font-bold text-gray-800">New Dojo</h1>
 
 <div class="flex w-full justify-center mt-8">
-    <form:form action="/create_ninja" method="post" cssClass="bg-white shadow-lg p-8 flex flex-col gap-6 w-full max-w-md rounded-lg" modelAttribute="dojo">
+    <form:form action="/create_dojo" method="post" cssClass="bg-white shadow-lg p-8 flex flex-col gap-6 w-full max-w-md rounded-lg" modelAttribute="dojo">
 
         <div class="flex flex-col gap-1">
-            <form:label path="name" class="font-medium">First Name:</form:label>
+            <form:label path="name" class="font-medium">Name :</form:label>
             <form:errors path="name" cssClass="text-red-600 text-sm"/>
             <form:input path="name" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
         </div>
