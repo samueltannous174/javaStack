@@ -36,4 +36,9 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public void addProductToCategory(Category category, Product product){
+        category.getProducts().add(product);
+        updateCategory(category);
+    }
+
 }

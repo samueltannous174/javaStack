@@ -36,4 +36,9 @@ public class ProductService {
     public Product updateProduct(Product product) {
         return productRepository.save(product);
     }
+
+    public void addCategoryToProduct(Product product, Category category){
+        product.getCategories().add(category);
+        updateProduct(product);
+    }
 }

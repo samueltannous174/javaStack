@@ -93,8 +93,8 @@ public class MainController {
 
         Product product = productService.findProduct(productId);
         Category category = categoryService.findCategory(categoryId);
-        product.getCategories().add(category);
-        productService.updateProduct(product);
+        productService.addCategoryToProduct(product, category);
+
         return "redirect:/product/"+productId;
     }
 
@@ -128,8 +128,11 @@ public class MainController {
 
         Product product = productService.findProduct(productId);
         Category category = categoryService.findCategory(categoryId);
-        category.getProducts().add(product);
-        categoryService.updateCategory(category);
+        if (product == null || category == null){
+            return "redirect:/";
+        }
+        categoryService.addProductToCategory(category, product);
+
         return "redirect:/category/"+ categoryId;
     }
 
