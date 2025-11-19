@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -56,24 +57,25 @@ public class MainController {
             return "newCategory";
         }
         categoryService.createCategory(category);
-        return "redirect:/categories/new" ;
+        return "redirect:/" ;
     }
 
     @GetMapping("product/{id}")
-    public String showDojo(@PathVariable("id") Long id, Model model){
+    public String showProduct(@PathVariable("id") Long id, Model model){
+
+
         Product product= productService.findProduct(id);
-        List<Category> categories = categoryService.getAllCategories();
-        model.addAttribute("categories",categories);
-
-
         if (product == null){
-            model.addAttribute("categories",categories);
             return "redirect:/" ;
         }
 
 
-        List<Category> productCategories = product.getCategories();
+
+        List<Category> categories = categoryService.getAllCategories();
+        Set<Category> productCategories = product.getCategories();
         model.addAttribute("productCategories",productCategories);
+        categories.removeAll(productCategories);
+        model.addAttribute("categories",categories);
 
 
         model.addAttribute("product", product);
@@ -84,6 +86,9 @@ public class MainController {
     @PostMapping("/add_category")
     public String addCategoryToProduct(@RequestParam("productId") Long productId,
                                        @RequestParam("category") Long categoryId) {
+        if (categoryId == null || productId == null){
+            return "redirect: /";
+        }
 
 
         Product product = productService.findProduct(productId);
@@ -95,18 +100,18 @@ public class MainController {
 
     @GetMapping("category/{id}")
     public String showCategory(@PathVariable("id") Long id, Model model){
-        Category category= categoryService.findCategory(id);
-        List<Product> products = productService.getAllProducts();
-        model.addAttribute("products",products);
 
+        Category category= categoryService.findCategory(id);
         if (category == null){
-            model.addAttribute("products",products);
             return "redirect:/" ;
         }
 
 
-        List<Product> productCategories = category.getProducts();
+        List<Product> products = productService.getAllProducts();
+        Set<Product> productCategories = category.getProducts();
         model.addAttribute("productCategories",productCategories);
+        products.removeAll(productCategories);
+        model.addAttribute("products",products);
 
 
         model.addAttribute("category", category);
@@ -117,6 +122,10 @@ public class MainController {
     @PostMapping("/add_product")
     public String addProductsToCategories(@RequestParam("categoryId") Long categoryId,
                                        @RequestParam("product") Long productId) {
+        if (categoryId == null || productId == null){
+            return "redirect:/";
+        }
+
         Product product = productService.findProduct(productId);
         Category category = categoryService.findCategory(categoryId);
         category.getProducts().add(product);

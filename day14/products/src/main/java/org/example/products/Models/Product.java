@@ -9,9 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "products")
@@ -30,8 +28,10 @@ public class Product {
     private BigDecimal price;
 
 
-    public Product(String name, List<Category> categories) {
+    public Product(String name, String description, BigDecimal price, Set<Category> categories) {
         this.name = name;
+        this.description = description;
+        this.price = price;
         this.categories = categories;
     }
 
@@ -75,7 +75,8 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> categories = new ArrayList<>();
+
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -109,11 +110,11 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
-    public List<Category> getCategories() {
+    public Set<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(Set<Category> categories) {
         this.categories = categories;
     }
 

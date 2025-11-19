@@ -7,9 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "categories")
@@ -46,9 +44,10 @@ public class Category {
     @JoinTable(
             name = "categories_products",
             joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            inverseJoinColumns = @JoinColumn(name = "product_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "category_id"})
     )
-    private List<Product> products= new ArrayList<>();
+    private Set<Product> products= new HashSet<Product>();
 
     public Long getId() {
         return id;
@@ -83,11 +82,11 @@ public class Category {
         this.updatedAt = updatedAt;
     }
 
-    public List<Product> getProducts() {
+    public Set<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(Set<Product> products) {
         this.products = products;
     }
 
