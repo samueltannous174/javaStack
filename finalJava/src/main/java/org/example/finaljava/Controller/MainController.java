@@ -28,7 +28,21 @@ public class MainController {
     public String Error404(@ModelAttribute("newUser") User newUser, @ModelAttribute("user") LoginUser user){
         return "error404";
     }
-    //hello
+
+    @RequestMapping ("/")
+    public String showHome(@ModelAttribute("newUser") User newUser, @ModelAttribute("user") LoginUser user,HttpSession session,Model model){
+        Long loggedId = (Long) session.getAttribute("id");
+
+        if (loggedId == null){
+            return "redirect:/auth";
+        }
+
+        User logged = userService.findUser(loggedId);
+        model.addAttribute("logged",logged);
+
+        return "home";
+    }
+
     @GetMapping("/auth")
     public String showAuth(
             @ModelAttribute("newUser") User newUser,
