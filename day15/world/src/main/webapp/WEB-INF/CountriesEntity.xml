@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="org.example.world.Models.CountriesEntity">
+        <table name="countries" schema="world" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="-1"/>
+            </id>
+            <basic name="code">
+                <column name="code" length="3"/>
+            </basic>
+            <basic name="name">
+                <column name="name" length="52"/>
+            </basic>
+            <basic name="continent">
+                <column name="continent" precision="-1"/>
+            </basic>
+            <basic name="region">
+                <column name="region" length="26"/>
+            </basic>
+            <basic name="surfaceArea">
+                <column name="surface_area" precision="2"/>
+            </basic>
+            <basic name="indepYear">
+                <column name="indep_year" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="population">
+                <column name="population" precision="-1"/>
+            </basic>
+            <basic name="lifeExpectancy">
+                <column name="life_expectancy" nullable="false" precision="1"/>
+            </basic>
+            <basic name="gnp">
+                <column name="gnp" nullable="false" precision="2"/>
+            </basic>
+            <basic name="gnpOld">
+                <column name="gnp_old" nullable="false" precision="2"/>
+            </basic>
+            <basic name="localName">
+                <column name="local_name" length="45"/>
+            </basic>
+            <basic name="governmentForm">
+                <column name="government_form" length="45"/>
+            </basic>
+            <basic name="headOfState">
+                <column name="head_of_state" nullable="false" length="60"/>
+            </basic>
+            <basic name="capital">
+                <column name="capital" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="code2">
+                <column name="code2" length="2"/>
+            </basic>
+            <one-to-many name="citiesById" mapped-by="countriesByCountryId"
+                         target-entity="org.example.world.Models.CitiesEntity"/>
+            <one-to-many name="languagesById" mapped-by="countriesByCountryId"
+                         target-entity="org.example.world.Models.LanguagesEntity"/>
+        </attributes>
+    </entity>
+</entity-mappings>
