@@ -28,7 +28,7 @@ public class MainController {
     public String Error404(@ModelAttribute("newUser") User newUser, @ModelAttribute("user") LoginUser user){
         return "error404";
     }
-
+    //hello
     @GetMapping("/auth")
     public String showAuth(
             @ModelAttribute("newUser") User newUser,
