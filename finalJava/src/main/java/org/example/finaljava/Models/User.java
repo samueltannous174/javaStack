@@ -18,14 +18,17 @@ public class User {
 
     @NotEmpty(message="Name is required!")
     @Size(min = 3, message = "Name must be more than 3 characters")
-    private String name;
+    private String firstName;
+    @NotEmpty(message="Name is required!")
+    @Size(min = 3, message = "Name must be more than 3 characters")
+    private String lastName;
 
     @NotBlank(message="Email is required!")
     @Email(message="Please enter a valid email!")
     private String email;
 
     @NotBlank(message="Password is required!")
-    @Size(min =8, message = "Password must be more than 3 characters")
+    @Size(min =8, message = "Password must be more than 8 characters")
     private String password;
 
     @Transient
@@ -33,9 +36,7 @@ public class User {
     @Size(min = 8, message = "Password must be more than 8 characters")
     private String confirm;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message="Birthday is required!")
-    private LocalDate birthday;
+
 
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -45,26 +46,51 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Task> tasks;
+
 
 
 
     public User() {
     }
 
-    public User(String name, String email, String password, String confirm, LocalDate birthday) {
-        this.name = name;
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public User(String firstName, String lastName, String email, String password, String confirm) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.confirm = confirm;
-        this.birthday = birthday;
     }
 
-    public String getName() {
-        return name;
+    public Long getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -86,49 +112,48 @@ public class User {
     public String getConfirm() {
         return confirm;
     }
+
     public void setConfirm(String confirm) {
         this.confirm = confirm;
     }
 
 
-    public Long getId() {
-        return id;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-
-    public LocalDate getBirthday() {
-        return birthday;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
-
-
-    @PrePersist
-    protected void onCreate(){
-        this.createdAt = new Date();
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
-    @PreUpdate
-    protected void onUpdate(){
-        this.updatedAt = new Date();
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", confirm='" + confirm + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
-
 }
 

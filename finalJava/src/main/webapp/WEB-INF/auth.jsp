@@ -38,7 +38,7 @@
             </div>
             <div class="ml-7 text-orange-100 flex items-center gap-9">
                 <c:if test="${not empty logged}">
-                    welcome ${logged.name}
+                    welcome ${logged.firstName}
                 </c:if>
                 <c:if test="${not empty logged}">
                     <form action="/logout" method="post">
@@ -68,9 +68,15 @@
     <form:form action="/register" method="post" cssClass="p-8 flex flex-col gap-6 w-full max-w-md rounded-lg" modelAttribute="newUser">
         <input type="hidden" name="id" value="${newUser.id}">
         <div class="flex flex-col gap-1">
-            <form:label path="name" class="font-medium">Name :</form:label>
-            <form:errors path="name" cssClass="text-red-600 text-sm"/>
-            <form:input path="name" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+            <form:label path="firstName" class="font-medium">First Name :</form:label>
+            <form:errors path="firstName" cssClass="text-red-600 text-sm"/>
+            <form:input path="firstName" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        </div>
+
+        <div class="flex flex-col gap-1">
+            <form:label path="lastName" class="font-medium">Last Name :</form:label>
+            <form:errors path="lastName" cssClass="text-red-600 text-sm"/>
+            <form:input path="lastName" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
         </div>
 
         <div class="flex flex-col gap-1">
@@ -79,12 +85,8 @@
             <form:input path="email" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"/>
         </div>
 
-        <div class="flex flex-col gap-1">
-            <form:label path="birthday" class="font-medium">Birthday:</form:label>
-            <form:errors path="birthday" cssClass="text-red-600 text-sm"/>
-            <form:input path="birthday" type="date"
-                        class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full"/>
-        </div>
+
+
 
         <div class="flex flex-col gap-1">
             <form:label path="password" class="font-medium">Password :</form:label>

@@ -85,33 +85,19 @@
             <tr>
                 <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     <div class="flex items-center">
-                        <span>Title</span>
-                        <i class="fas fa-sort ml-1 text-gray-400"></i>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    <div class="flex items-center">
-                        <span>Author Name</span>
-                        <i class="fas fa-sort ml-1 text-gray-400"></i>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    <div class="flex items-center">
-                        <span>Posted By</span>
+                        <span>Type</span>
                         <i class="fas fa-sort ml-1 text-gray-400"></i>
                     </div>
                 </th>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-            <c:forEach var="book" items="${books}">
+
+            <c:forEach var="type" items="${types}">
                 <tr class="hover:bg-gray-100 transition">
-                    <td class="py-3 px-6"><a href="/books/${book.id}" class="text-blue-600 hover:underline">${book.title}</a></td>
-                    <td class="py-3 px-6"><a  class="text-blue-600 hover:underline">${book.authorName}</a></td>
-                    <td class="py-3 px-6"><a  class="text-blue-600 hover:underline">${book.user.name}</a></td>
+                    <td class="py-3 px-6"><a href="/type/${type.id}" class="text-blue-600 hover:underline">${type.name}</a></td>
                 </tr>
             </c:forEach>
-
 
             </tbody>
         </table>

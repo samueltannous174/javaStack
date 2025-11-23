@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public User register(User newUser, BindingResult result) {
-
+        System.out.println("entered3");
         System.out.println(newUser);
 
 
@@ -34,13 +34,6 @@ public class UserService {
         if(!newUser.getPassword().equals(newUser.getConfirm())) {
             result.rejectValue("confirm", "Matches", "Passwords must match!");
         }
-        if (result.hasFieldErrors("birthday") || newUser.getBirthday() == null) {
-            result.rejectValue("birthday", "Invalid", "Please enter a valid date (yyyy-MM-dd).");
-        }
-        if (Period.between(newUser.getBirthday(), LocalDate.now()).getYears() < 10) {
-            result.rejectValue("birthday", "TooYoung", "You must be at least 10 years old to register");
-        }
-
 
         if(result.hasErrors()) {
             return null;
@@ -79,5 +72,8 @@ public class UserService {
 
         return user;
     }
+
+
+
 }
 
